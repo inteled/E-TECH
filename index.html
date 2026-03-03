@@ -2,63 +2,157 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>E-TECH</title>
+  <title>ED-TALES - Lavender Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --purple: #c084fc;
-      --purple-dark: #a855f7;
-      --blue-bg: #e8f6ff;
-      --footer-bg: #eedcff;
-      --text-dark: #1f2937;
-      --text-muted: #6b7280;
-      --card-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      --radius: 18px;
+      --bg-main: #fdfaff;
+      --lavender-light: #e9d5ff;
+	  --blue-bg: #e8f6ff;
+      --purple-accent: #a78bfa;
+      --purple-mid: #7c3aed;
+      --purple-deep: #5b21b6;
+      --text-dark: #2e1065;
+      --text-muted: #6d28d9;
+      --card-shadow: 0 10px 30px rgba(167, 139, 250, 0.15);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: "Inter", sans-serif;
       color: var(--text-dark);
-      background: #ffffff;
+      background: var(--bg-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
     }
+
+		footer {
+		background: var(--footer-bg);
+		text-align: center;
+		padding: 32px 16px;
+		font-size: 16px;
+	}
+	
+	.features a {
+  text-decoration: none;   /* removes underline */
+  color: inherit;          /* keeps original text color */
+  display: block;          /* makes whole card clickable properly */
+}
+
+/* ================= ICT BACKGROUND ================= */
+
+.ict-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* stays behind all content */
+  opacity: 0.35; /* more visible but still subtle */
+  pointer-events: none; /* clicks pass through */
+  overflow: hidden;
+}
+
+/* Gears */
+.gear {
+  position: absolute;
+  fill: rgba(167, 139, 250, 0.6); /* semi-transparent lavender */
+  animation: rotateGear 20s linear infinite;
+}
+
+.gear-1 { top: 10%; left: 5%; width: 120px; animation-duration: 25s; }
+.gear-2 { top: 60%; right: 8%; width: 180px; fill: rgba(124, 58, 237, 0.6); animation-direction: reverse; }
+.gear-3 { bottom: 15%; left: 15%; width: 80px; fill: rgba(91, 33, 182, 0.6); animation-duration: 15s; }
+
+@keyframes rotateGear {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Binary floating */
+.binary-stream {
+  position: absolute;
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgba(124, 58, 237, 0.7); /* more visible lavender */
+  opacity: 0.7;
+  animation: floatBinary 15s linear infinite;
+}
+
+.bin-1 { top: 25%; right: 20%; }
+.bin-2 { top: 75%; left: 10%; color: rgba(91, 33, 182, 0.7); animation-delay: 5s; }
+
+@keyframes floatBinary {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 0.7; }
+  100% { transform: translateY(-100px); opacity: 0; }
+}
+
+/* Circuit Lines */
+.circuit-line {
+  position: absolute;
+  stroke: rgba(124, 58, 237, 0.6); /* soft lavender */
+  stroke-width: 2;
+  fill: none;
+  opacity: 0.7;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: flow 6s linear infinite;
+}
+
+.circuit-dot {
+  fill: rgba(91, 33, 182, 0.7); /* deep lavender */
+  animation: pulseDot 2s ease-in-out infinite alternate;
+}
+
+.line-1 { top: 15%; left: 0; width: 100%; height: 120px; }
+.line-2 { bottom: 20%; left: 0; width: 100%; height: 150px; animation-delay: 2s; }
+.line-3 { top: 50%; left: 0; width: 100%; height: 100px; animation-delay: 4s; }
+
+@keyframes flow {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pulseDot {
+  from { opacity: 0.4; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.3); }
+}
+    /* ================= NAVBAR ================= */
 
     /* NAVBAR */
-    .navbar {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .logo {
+ .logo {
   max-width: 150px;
   width: 100%;
   height: auto;
 }
 
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      font-weight: 500;
-    }
+.nav-links {
+  display: flex;
+  gap: 32px;
+  font-weight: 500;
+}
 
-    .nav-links a {
-      text-decoration: none;
-      color: #111827;
-    }
+.nav-links a {
+  text-decoration: none;
+  color: #111827;
+}
+    /* ================= HERO ================= */
 
-    /* HERO */
+     /* HERO */
     .hero {
       text-align: center;
       padding: 40px 20px 80px;
@@ -75,8 +169,9 @@
       color: var(--text-muted);
     }
 
-    /* FEATURE SECTION */
-    .features-section {
+    /* ================= FEATURES ================= */
+
+   .features-section {
       background: var(--blue-bg);
       padding: 80px 20px;
     }
@@ -89,96 +184,106 @@
       gap: 32px;
     }
 
-    .card {
-      background: #ffffff;
-      border-radius: var(--radius);
-      padding: 32px;
-      box-shadow: var(--card-shadow);
-    }
-
-    .card h3 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
     .card p {
       font-size: 16px;
       color: var(--text-muted);
       line-height: 1.6;
     }
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
 
-    /* CTA BUTTON */
-    .cta-wrapper {
+	.card {
+  background: #ffffff;
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--purple-accent);
+    }
+
+    .card h3 {
+      color: var(--purple-deep);
+      margin-bottom: 12px;
+    }
+
+    /* ================= CTA BUTTON ================= */
+
+    .cta-button {
+      background: var(--purple-mid);
+      color: white;
+      border: none;
+      padding: 18px 42px;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.05);
+      background: var(--purple-deep);
+    }
+	.cta-wrapper {
       display: flex;
       justify-content: center;
       margin-top: 60px;
     }
 
-    .cta-button {
-      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
-      color: #ffffff;
-      border: none;
-      padding: 18px 42px;
-      font-size: 18px;
-      font-weight: 600;
-      border-radius: 999px;
-      cursor: pointer;
-      box-shadow: 0 12px 30px rgba(168, 85, 247, 0.35);
-    }
-	
-	/* CARD HOVER ANIMATION */
-.card {
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
 
-.card:hover {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 20px 40px rgba(168, 85, 247, 0.25);
-}
-
-/* ICON POP ANIMATION */
-.card-icon {
-  transition: transform 0.35s ease;
-}
-
-.card:hover .card-icon {
-  transform: scale(1.25) rotate(-5deg);
-}
-
-/* BUTTON HOVER (BONUS) */
-.cta-button {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cta-button:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 18px 40px rgba(168, 85, 247, 0.45);
-}
-
-
-    /* FOOTER */
-    footer {
-      background: var(--footer-bg);
-      text-align: center;
-      padding: 32px 16px;
-      font-size: 16px;
-    }
-
-    /* RESPONSIVE */
     @media (max-width: 900px) {
-      .features {
-        grid-template-columns: 1fr;
-      }
-
+      .features { grid-template-columns: 1fr; }
       .hero h1 {
-        font-size: 40px;
-      }
-    }
+  font-size: 82px;
+  font-weight: 800;
+  background: linear-gradient(to right, var(--purple-deep), #ec4899); /* Purple to Pink */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+}
+.body-bg {
+  background: rgba(147, 197, 253, 0.9); /* light blue transparent */
+  backdrop-filter: blur(8px);           /* optional: soft frosted effect */
+  min-height: 100vh;
+}
   </style>
 </head>
-
 <body>
+
+  <!-- ICT Animated Background -->
+  <div class="ict-background">
+
+    <!-- Gears -->
+    <svg class="gear gear-1" viewBox="0 0 100 100">
+      <path d="M95,44.9V55h-9.8c-0.8,3.5-2,6.8-3.7,9.9l6.9,6.9L81.2,79l-6.9-6.9c-3.1,1.7-6.4,3-9.9,3.7V85H44.9v-9.8c-3.5-0.8-6.8-2-9.9-3.7l-6.9,6.9L21,71.2l6.9-6.9c-1.7-3.1-3-6.4-3.7-9.9H15V44.9h9.8c0.8-3.5,2-6.8,3.7-9.9l-6.9-6.9L28.8,21l6.9,6.9c3.1-1.7,6.4-3,9.9-3.7V15H55v9.8c3.5,0.8,6.8,2,9.9,3.7l6.9-6.9L79,28.8l-6.9,6.9c1.7,3.1,3,6.4,3.7,9.9H95z"/>
+    </svg>
+
+    <!-- Binary -->
+    <div class="binary-stream bin-1">1011001 01101111</div>
+    <div class="binary-stream bin-2">01001001 01000011</div>
+
+    <!-- Circuit Lines -->
+    <svg class="circuit-line line-1" viewBox="0 0 1200 120">
+      <path d="M0 60 H300 V30 H600 V90 H900 V60 H1200"/>
+      <circle class="circuit-dot" cx="300" cy="30" r="5"/>
+      <circle class="circuit-dot" cx="600" cy="90" r="5"/>
+      <circle class="circuit-dot" cx="900" cy="60" r="5"/>
+      <circle class="circuit-dot" cx="400" cy="40" r="5"/>
+      <circle class="circuit-dot" cx="500" cy="50" r="5"/>
+      <circle class="circuit-dot" cx="700" cy="70" r="5"/>
+    </svg>
+
+  </div>
 
   <!-- NAV -->
   <header class="navbar">
@@ -193,8 +298,8 @@
 
   <!-- HERO -->
   <section class="hero">
-    <h1> E-TECH</h1>
-    <p>“Bringing Quality Education to Life Through Stories”
+    <h1> ED-TALES</h1>
+    <p>Bringing Quality Education to Life Through Stories
 </p>
   </section>
 
@@ -202,21 +307,26 @@
   <section class="features-section">
     <div class="features">
 
-      <div class="card">
+      <a href="lottie.html">
+	  <div class="card">
         <h3>READ STORIES</h3>
-        <p>Discover magical tales and adventures!</p>
+        <p>Discover tales and adventures!</p>
       </div>
+	  </a>
 
+	  <a href="about.html">
       <div class="card">
-        <h3>EXPLORE  ICT</h3>
-        <p>Dscover the fun in ICT!</p>
+        <h3>LEARN ABOUT ED-TALES</h3>
+        <p>Discover our Mission and Vision</p>
       </div>
+	  </a>
 
+      <a href="activities.html">
       <div class="card">
         <h3>PLAY WHILE LEARNING</h3>
-        <p>Fun games, Bright minds</p>
+        <p>Fun games to Test your Learnings</p>
       </div>
-
+	  </a>
     </div>
 
     <div class="cta-wrapper">
@@ -232,4 +342,5 @@
   </footer>
 
 </body>
+   
 </html>
