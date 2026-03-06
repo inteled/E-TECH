@@ -125,6 +125,7 @@
     /* ================= NAVBAR ================= */
 
     /* NAVBAR */
+/* NAVBAR */
 .navbar {
   max-width: 1200px;
   margin: 0 auto;
@@ -132,8 +133,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
 
+  background: white;        /* makes header plain white */
+  position: relative;
+  z-index: 10;              /* keeps it above the hero GIF */
+}
  .logo {
   max-width: 150px;
   width: 100%;
@@ -152,23 +156,34 @@
 }
     /* ================= HERO ================= */
 
-     /* HERO */
-    .hero {
-      text-align: center;
-      padding: 40px 20px 80px;
-    }
+    /* HERO */
+.hero {
+  text-align: center;
+  padding: 200px 100px 220px;
+  background-image: url("edd.gif");
+  background-size: cover;      /* scales the GIF to fill the hero */
+  background-position: center; /* keeps it centered */
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+}
 
-    .hero h1 {
-      font-size: 56px;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
+/* optional dark overlay so text stays readable */
+.hero::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.35);
+}
 
-    .hero p {
-      font-size: 20px;
-      color: var(--text-muted);
-    }
-
+.hero h1,
+.hero p{
+  position:relative;
+  z-index:1;
+}
     /* ================= FEATURES ================= */
 
    .features-section {
@@ -238,6 +253,95 @@
       justify-content: center;
       margin-top: 60px;
     }
+	/* ================= ICT TRIVIA SECTION ================= */
+
+.trivia-section{
+  padding:80px 20px;
+  background:#ffffff;
+  text-align:center;
+}
+
+.trivia-box{
+  max-width:700px;
+  margin:auto;
+  background:var(--lavender-light);
+  padding:40px;
+  border-radius:20px;
+  box-shadow:var(--card-shadow);
+  position:relative;
+  animation: floatTrivia 4s ease-in-out infinite;
+  transition: transform 0.3s;
+}
+
+.trivia-box:hover{
+  transform:scale(1.03);
+}
+
+.trivia-title{
+  font-size:28px;
+  font-weight:700;
+  color:var(--purple-deep);
+  margin-bottom:20px;
+}
+
+.trivia-text{
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:25px;
+  animation: fadeFact 0.6s ease;
+}
+
+@keyframes fadeFact{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.trivia-btn{
+  background:var(--purple-mid);
+  color:white;
+  border:none;
+  padding:14px 30px;
+  font-size:16px;
+  font-weight:600;
+  border-radius:999px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.trivia-btn:hover{
+  background:var(--purple-deep);
+  transform:scale(1.05);
+}
+
+.trivia-box::before{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:22px;
+  background:linear-gradient(
+      120deg,
+      #a78bfa,
+      #7c3aed,
+      #ec4899,
+      #7c3aed
+  );
+  z-index:-1;
+  filter:blur(12px);
+  opacity:0.5;
+}
+
+@keyframes floatTrivia{
+  0%{ transform:translateY(0px); }
+  50%{ transform:translateY(-10px); }
+  100%{ transform:translateY(0px); }
+}
+
 
 
     @media (max-width: 900px) {
@@ -298,9 +402,6 @@
 
   <!-- HERO -->
   <section class="hero">
-    <h1> ED-TALES</h1>
-    <p>Bringing Quality Education to Life Through Stories
-</p>
   </section>
 
   <!-- FEATURES -->
@@ -335,11 +436,74 @@
 	  </a>
     </div>
   </section>
+  
+  <!-- ICT TRIVIA SECTION -->
+<section class="trivia-section">
+
+  <div class="trivia-box">
+    <div class="trivia-title">💡 Did You Know?</div>
+
+    <p id="fact" class="trivia-text">
+      Click the button to learn a fun ICT fact!
+    </p>
+
+    <button class="trivia-btn" onclick="generateFact()">
+      Show Random ICT Fact
+    </button>
+  </div>
+
+</section>
 
   <!-- FOOTER -->
   <footer>
     Learning made fun, one story at a time.
   </footer>
+<script>
+
+const facts = [
+
+"Computers used to be HUGE! The first modern computers were so big they could fill an entire room.",
+
+"The abacus was the first 'computer.' Long before laptops, people used the abacus made of beads and strings to solve math problems.",
+
+"Computers follow instructions like recipes. These instructions are called programs.",
+
+"The mouse wasn’t always part of computers. Early computers required users to type everything.",
+
+"Computers help us in everyday life—from sending messages to playing games.",
+
+"Computers speak binary, a language made of only two numbers: 0 and 1.",
+
+"Your smartphone is more powerful than the computers used during the moon landing in 1969.",
+
+"The word 'computer' originally referred to a person who solved math problems.",
+
+"The first computer mouse invented in 1964 was made of wood.",
+
+"Computers cannot think on their own. They only follow instructions given by humans.",
+
+"The fastest computers are called supercomputers and can solve millions of problems per second.",
+
+"The Internet connects billions of computers around the world."
+
+];
+
+function generateFact(){
+
+const randomNumber = Math.floor(Math.random() * facts.length);
+
+const factElement = document.getElementById("fact");
+
+factElement.style.animation = "none";
+factElement.offsetHeight; // restart animation
+
+factElement.textContent = facts[randomNumber];
+
+factElement.style.animation = "fadeFact 0.6s ease";
+
+}
+
+</script>
 
 </body>
    
