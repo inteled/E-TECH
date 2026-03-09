@@ -380,6 +380,83 @@
   backdrop-filter: blur(8px);           /* optional: soft frosted effect */
   min-height: 100vh;
 }
+
+
+	/* =========================
+	   MOBILE
+	========================= */
+
+	@media (max-width: 768px){
+
+	.navbar{
+	flex-direction:column;
+	gap:15px;
+	}
+
+	.nav-links{
+	flex-wrap:wrap;
+	justify-content:center;
+	gap:15px;
+	}
+
+	.hero{
+	padding:60px 20px;
+	}
+
+	.hero h1{
+	font-size:32px;
+	}
+
+	.hero p{
+	font-size:16px;
+	}
+
+	.story-item{
+	font-size:14px;
+	padding:15px 18px;
+	}
+
+	.story-viewer{
+	width:100%;
+	height:90vh;
+	border-radius:0;
+	}
+
+	.nav-btn{
+	padding:12px 10px;
+	font-size:20px;
+	}
+
+	.sign-language-overlay{
+	width:140px;
+	bottom:15px;
+	right:15px;
+	}
+
+	}
+
+
+	/* =========================
+	   VERY SMALL PHONES
+	========================= */
+
+	@media (max-width: 480px){
+
+	.hero h1{
+	font-size:26px;
+	}
+
+	.hero p{
+	font-size:15px;
+	}
+
+	.activity-btn{
+	font-size:15px;
+	padding:12px 25px;
+	}
+
+	}
+	
   </style>
 </head>
 <body>
