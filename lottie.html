@@ -497,7 +497,7 @@
         <div class="slides-container" id="slides"></div>
 
         <div class="sign-language-overlay" id="signContainer" style="display:none;">
-          <video id="signVideo" playsinline muted></video>
+		<video id="signVideo" playsinline></video>
         </div>
       </div>
     </div>
@@ -712,6 +712,11 @@ const stories = {
 
 let currentChapter = null;
 let currentSlideIndex = 0;
+const signVideo = document.getElementById("signVideo");
+
+signVideo.addEventListener("ended", function () {
+  changeSlide(1); // go to next slide automatically
+});
 
 function openStory(id){
   currentChapter = stories[id];
@@ -719,7 +724,27 @@ function openStory(id){
   document.getElementById("overlay").style.display="flex";
   renderSlides();
   showSlide(0);
+
+  document.getElementById("modalActivityBtn").onclick = () => {
+    window.location.href = currentChapter.activity;
+  };
 }
+
+function showReward(){
+  document.getElementById("rewardModal").style.display = "flex";
+
+  // confetti celebration
+  confetti({
+    particleCount: 120,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+}
+
+function closeReward(){
+  document.getElementById("rewardModal").style.display = "none";
+}
+
 
 function renderSlides(){
   const container=document.getElementById("slides");
@@ -769,11 +794,16 @@ function showSlide(index){
 }
 
 function changeSlide(step){
-  const next=currentSlideIndex+step;
+  const next = currentSlideIndex + step;
 
-  if(next>=0 && next<currentChapter.slides.length){
-    currentSlideIndex=next;
+  if(next >= 0 && next < currentChapter.slides.length){
+    currentSlideIndex = next;
     showSlide(currentSlideIndex);
+
+    // If this is the last slide → show reward
+    if(currentSlideIndex === currentChapter.slides.length - 1){
+        setTimeout(showReward, 800);
+    }
   }
 }
 
